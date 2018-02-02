@@ -6,25 +6,34 @@
           Log-in to your account
         </div>
       </h2>
-      <form class="ui large form">
+      <form class="ui large form" novalidate (ngSubmit)="save(loginForm)" #loginForm="ngForm">
         <div class="ui stacked segment">
-          <div class="field">
+          <div class="required field" [ngClass]="{'error':(emailVar.touched && !emailVar.valid)}">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail address" [(ngModel)]="email">
+              <input  #emailVar="ngModel" type="text" name="email" placeholder="E-mail address" [(ngModel)]="model.email" required email/>
             </div>
           </div>
-          <div class="field">
+          <div class="field" [ngClass]="{'error': (passwordVar.touched && !passwordVar.valid)}">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password"  [(ngModel)]="password">
+              <input #passwordVar="ngModel"  type="password" name="password" placeholder="Password"  [(ngModel)]="model.password" required>
             </div>
           </div>
-          <div class="ui fluid large teal submit button" (click)="onAuthenticate()">Login</div>
+          <button type="submit" class="ui fluid large teal submit button" [disabled]="!loginForm.valid">Login</button>
         </div>
-  
-        <div class="ui error message"></div>
-  
+
+        
+        
+        
+        <pre>
+          {{model | json}}
+          {{emailVar.dirty}}
+          {{emailVar.touched}}
+          {{emailVar.valid}}
+          {{emailVar.errors | json}}
+        </pre>
+        
       </form>
   
     </div>
