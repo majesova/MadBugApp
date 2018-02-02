@@ -12,7 +12,11 @@
             <div class="ui left icon input">
               <i class="user icon"></i>
               <input  #emailVar="ngModel" type="text" name="email" placeholder="E-mail address" [(ngModel)]="model.email" required email/>
+              
             </div>
+            <div class="ui pointing red basic label" *ngIf="emailVar.touched && !emailVar.valid">
+                Please enter a valid email format
+              </div>
           </div>
           <div class="field" [ngClass]="{'error': (passwordVar.touched && !passwordVar.valid)}">
             <div class="ui left icon input">
