@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="menu" class="ui fixed  menu">
+  <div id="menu" class="ui fixed  menu">
         <div class="ui container">
           <a href="#" class="header item">
             <img class="logo" src="assets/images/logo_bug.png">
@@ -10,9 +10,10 @@
             Menu
           </a>          
         </div>
+        {{userName}}
       </div>
       <div class="ui main text container">
-            <app-login></app-login>
+          <router-outlet></router-outlet>
       </div>
       
       

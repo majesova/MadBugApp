@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {AccountService} from "./security/account.service";
 
 declare var jquery:any;
 declare var $ :any;
@@ -11,10 +12,20 @@ declare var $ :any;
 })
 export class AppComponent implements OnInit {
   title = 'app';
-
+  userName:string='';
  
+  constructor(private accountService: AccountService){
+
+  }
+
   ngOnInit() {
-    $("#mainMenu").on("click",function(){
+
+
+    this.userName = this.accountService.getCurrentSession().userName;
+
+
+    $("#mainMenu").on("click",function(event){
+      event.preventDefault();
       $('.ui.labeled.icon.sidebar')
       .sidebar('toggle')
     ;

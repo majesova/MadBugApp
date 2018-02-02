@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import * as CryptoJS from 'crypto-js';
+import {AccountService} from '../account.service'
+import { environment } from '../../../environments/environment';
+import { fail } from 'assert';
+import { Router } from '@angular/router';
 
 
 declare var jquery:any;
 declare var $ :any;
+
 
 @Component({
   selector: 'app-login',
@@ -12,17 +19,32 @@ declare var $ :any;
 
 export class LoginComponent implements OnInit {
 
+  environmentName = environment.envName;
+  isLoading:boolean= false;
   model:any = {email:'', password:''};
+  errorMessage:string ;
 
-  constructor() { }
-
-  ngOnInit() {
-    
-    $("#menu" ).remove();
+  constructor(private _http: HttpClient, private _accountService:AccountService, private router:Router) { 
   }
 
-  save(loginForm){
-    alert("login! "+ this.model.email + this.model.password);
+  text :string="manuel";
+
+  ngOnInit() {
+    console.log("cosa");
+    $("#menu" ).remove();
+    console.log(this._accountService.getCurrentSession().access_token);
+  }
+
+  authenticate(loginForm){
+      this.isLoading = true;
+        this._accountService.doLogin(this.model.email, this.model.password)
+          .subscribe(data=>{ 
+            this.isLoading = false;  
+            this.errorMessage = null; 
+            location.href = "/bugs";
+          },
+          error=>{ this.errorMessage = error; 
+            this.isLoading = false;});
   }
 
 }

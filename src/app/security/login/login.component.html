@@ -6,7 +6,7 @@
           Log-in to your account
         </div>
       </h2>
-      <form class="ui large form" novalidate (ngSubmit)="save(loginForm)" #loginForm="ngForm">
+      <form class="ui large form" novalidate (ngSubmit)="authenticate(loginForm)" #loginForm="ngForm">
         <div class="ui stacked segment">
           <div class="required field" [ngClass]="{'error':(emailVar.touched && !emailVar.valid)}">
             <div class="ui left icon input">
@@ -24,21 +24,17 @@
               <input #passwordVar="ngModel"  type="password" name="password" placeholder="Password"  [(ngModel)]="model.password" required>
             </div>
           </div>
-          <button type="submit" class="ui fluid large teal submit button" [disabled]="!loginForm.valid">Login</button>
+          <button type="submit" [ngClass]="{'loading': isLoading }" class="ui fluid large teal submit button" [disabled]="!loginForm.valid">Login</button>
         </div>
 
-        
-        
-        
-        <pre>
-          {{model | json}}
-          {{emailVar.dirty}}
-          {{emailVar.touched}}
-          {{emailVar.valid}}
-          {{emailVar.errors | json}}
-        </pre>
-        
       </form>
-  
+      
+      <div class="ui negative message" *ngIf="errorMessage">
+        <div class="header">
+          Ups!
+        </div>
+        <p>{{errorMessage}}
+      </p></div>
     </div>
   </div>
+  
