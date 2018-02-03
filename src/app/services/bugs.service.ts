@@ -9,7 +9,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment.prod';
 import {AccountService} from '../security/account.service'
-import { open } from 'fs';
 import { Headers } from '@angular/http/src/headers';
 
 @Injectable()
