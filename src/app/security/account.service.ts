@@ -60,6 +60,14 @@ export class AccountService {
     return null;
   }
 
+  public getToken():string{
+    var session = this.getCurrentSession();
+    if(session!=null){
+      return session.access_token;
+    }
+    return null;
+  }
+
   getIsValidSession(){
 
   }

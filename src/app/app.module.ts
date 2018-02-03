@@ -12,6 +12,7 @@ import { AlertMessageComponent, AlertMessageModal } from './shared/alert-message
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AccountService } from './security/account.service';
 import { BuglistComponent } from './bugs/buglist/buglist.component';
+import { BugsService } from './services/bugs.service';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { BuglistComponent } from './bugs/buglist/buglist.component';
     AlertMessageComponent //se configura para enviar alertas
   ],
   
-  providers: [AccountService],
+  providers: [AccountService, BugsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
   text :string="manuel";
 
   ngOnInit() {
-    console.log("cosa");
-    $("#menu" ).remove();
     console.log(this._accountService.getCurrentSession().access_token);
   }
 
@@ -41,7 +39,7 @@ export class LoginComponent implements OnInit {
           .subscribe(data=>{ 
             this.isLoading = false;  
             this.errorMessage = null; 
-            location.href = "/bugs";
+            this.router.navigate([("/bugs")]);
           },
           error=>{ this.errorMessage = error; 
             this.isLoading = false;});

@@ -24,12 +24,18 @@ export class AppComponent implements OnInit {
     this.userName = this.accountService.getCurrentSession().userName;
 
 
-    $("#mainMenu").on("click",function(event){
+    /*$("#mainMenu").on("click",function(event){
       event.preventDefault();
+
       $('.ui.labeled.icon.sidebar')
+      .sidebar({
+        context: $('#ctx')
+      })
       .sidebar('toggle')
     ;
-    })
-    
+    })*/
+
+    $('.ui.sidebar').sidebar({context: $('.segment')}).sidebar('attach events', '.menu .mnu');
+ 
   }
 }
