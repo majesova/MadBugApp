@@ -50,7 +50,9 @@ export class AccountService {
 
   public getCurrentSession():any {
     var token = localStorage.getItem("token");
-    if(token !== undefined)
+    if(token==null) return null;
+    console.log(token);
+    if(token != null && token != undefined )
     {
       var encrypted = token;
       var decrypted = CryptoJS.AES.decrypt(encrypted, this.key, {keySize: 128 / 8,iv: this.iv,mode: CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
@@ -68,8 +70,16 @@ export class AccountService {
     return null;
   }
 
-  getIsValidSession(){
-
+  public getIsValidSession():boolean{
+      
+      var session=this.getCurrentSession();
+      console.log(session);
+      return session!=null;
+        
+      
+  }
+  public logout(){
+    localStorage.removeItem("token");
   }
 
 }

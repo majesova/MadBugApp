@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   text :string="manuel";
 
   ngOnInit() {
-    console.log(this._accountService.getCurrentSession().access_token);
+    
   }
 
   authenticate(loginForm){

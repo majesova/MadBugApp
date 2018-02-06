@@ -33,9 +33,9 @@ export class AlertMessageComponent implements OnInit {
 
 
 export class AlertMessageModal extends ComponentModalConfig<IAlertModalContext, any, void> {
-  constructor(title:string, message:string, size = ModalSize.Small) {
+  constructor(title:string, message:string, size = ModalSize.Mini) {
       super(AlertMessageComponent, { title, message});
-      this.isClosable = false;
+      this.isClosable = true;
       this.transitionDuration = 200;
       this.size = size;
   }

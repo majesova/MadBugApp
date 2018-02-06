@@ -1,0 +1,33 @@
+
+<div class="ui main container">
+    <div class="row">
+      <h1 class="ui header teal">Bug details</h1>
+  </div>
+  
+  <div class="ui raised segment" *ngIf="bug">
+      <h3 class="ui header">#{{bug.id}} - {{bug.title}}</h3> 
+      <app-severity [severity]='bug.severity'></app-severity>
+      <p>
+        {{bug.body}}
+      </p>
+    </div>
+    <div class="ui raised segment" *ngIf="bug">
+        <h3 class="ui header">Steps to reproduce</h3>
+        <p class="text">
+          {{bug.stepToReproduce}}
+        </p>
+      </div>
+
+  <div class="ui raised segment" *ngIf="bug">
+        <h3 class="ui header">Follow up</h3>
+        <p>{{bug.isFixed?'Fixed':'Not Fixed'}}</p>
+        <p>
+          Created {{bug.createdAt | fromnow}}, Modified {{bug.modifiedAt | fromnow}}
+        </p>
+        
+      </div>
+  <a class="ui orange left floated button" [routerLink]="['/bugs/']"> Back</a>
+  <!--<pre>
+    {{bug | json}}
+  </pre>-->
+  </div>

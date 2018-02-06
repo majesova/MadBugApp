@@ -28,10 +28,11 @@ export class WelcomeComponent implements OnInit {
   }
   
    open() {
-    this.modalService
-    .open(new AlertMessageModal("Are you sure?", "Message apa", ModalSize.Large))
+    
+    this.modalService.open(new AlertMessageModal("Are you sure?", "Message apa", ModalSize.Mini))
     .onApprove((retornado:any) => alert("User has accepted." + retornado.valor))
     .onDeny(() => alert("User has denied."));
+
   }
 
 }

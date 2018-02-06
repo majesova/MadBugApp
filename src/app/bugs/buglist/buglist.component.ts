@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BugsService} from '../../services/bugs.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-buglist',

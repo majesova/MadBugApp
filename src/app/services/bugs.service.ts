@@ -10,22 +10,22 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment.prod';
 import {AccountService} from '../security/account.service'
 import { Headers } from '@angular/http/src/headers';
+import { AddBug } from '../bugs/addbug';
 
 @Injectable()
 export class BugsService {
   private _urlBugs = environment.apiUrl + 'api/bug/';
 
-  constructor(private _http: HttpClient, private _accountService:AccountService) { }
-  headers:Headers;
+  constructor(private _http: HttpClient, private _accountService:AccountService) { 
+    
+  }
+  
   public getBugs():Observable<any>{
     var token = this._accountService.getToken();
     
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'text/plain',
-        'Authorization': 'bearer '+ token,
-        "Access-Control-Allow-Credentials": "true"
+        'Content-Type':  'application/json','Authorization': 'bearer '+ token,"Access-Control-Allow-Credentials": "true"
       })
     };
     
@@ -36,6 +36,40 @@ export class BugsService {
     .catch(this.handleError);
     
 }
+
+public getBug(id:number){
+  var token = this._accountService.getToken();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json','Authorization': 'bearer '+ token,"Access-Control-Allow-Credentials": "true"
+    })
+  };
+  return this._http.get<any>(this._urlBugs + id, httpOptions)
+  .do(data=>{
+      
+  })
+  .catch(this.handleError);
+
+
+}
+
+public saveBug(bug:AddBug){
+  var token = this._accountService.getToken();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json','Authorization': 'bearer '+ token,"Access-Control-Allow-Credentials": "true"
+    })
+  };
+  return this._http.post<any>(this._urlBugs,bug, httpOptions)
+  .do(data=>{
+      
+  })
+  .catch(this.handleError);
+
+
+}
+
+
 
 handleError(err:HttpErrorResponse){
   console.log("handle error" + err.error.error_description);

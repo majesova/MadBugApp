@@ -1,0 +1,77 @@
+
+
+<div class="ui container">
+    <div class="row">
+        <div class="ui breadcrumb">
+            <a class="section" [routerLink]="['/bugs/']">Bugs</a>
+            <i class="right angle icon divider"></i>
+            <div class="active section">Add Bug</div>
+          </div>
+      <h1 class="ui header teal">Add a Bug</h1>
+
+  <form novalidate (ngSubmit)='save(createBugForm.value)' [formGroup]="createBugForm" class="ui form">
+      <div class="field" [ngClass]="{'error':createBugForm.get('title').touched && !createBugForm.get('title').valid}">
+          <label>Title</label>
+          <input type="text" name="title" placeholder="Title" formControlName="title">
+          <div class="ui pointing red basic label" 
+            *ngIf="createBugForm.get('title').touched 
+                && createBugForm.get('title').errors
+                  && createBugForm.get('title').errors.required">
+            Please enter a title
+          </div>
+          <div class="ui pointing red basic label" 
+          *ngIf="createBugForm.get('title').touched 
+            && createBugForm.get('title').errors
+            && createBugForm.get('title').errors.maxlength">
+              Max length reached (50)
+          </div>
+        </div>
+        <div class="field" [ngClass]="{'error':createBugForm.get('body').touched && !createBugForm.get('body').valid}">
+            <label>Body ({{ 500 - createBugForm.get('body').value.length}})</label> 
+            <textarea formControlName="body" placeholder="Body"></textarea>
+            <div class="ui pointing red basic label" 
+            *ngIf="createBugForm.get('body').touched 
+                && createBugForm.get('body').errors
+                  && createBugForm.get('body').errors.required">
+            Please enter a body
+          </div>
+          <div class="ui pointing red basic label" 
+          *ngIf="createBugForm.get('body').touched 
+            && createBugForm.get('body').errors
+            && createBugForm.get('body').errors.maxlength">
+              Max length reached (500)
+          </div>
+          </div>
+          <div class="field" [ngClass]="{'error':createBugForm.get('stepToReproduce').touched && !createBugForm.get('stepToReproduce').valid}" >
+              <label>Steps to reproduce ({{ 250 - createBugForm.get('stepToReproduce').value.length}})</label>
+              <textarea rows="2" formControlName="stepToReproduce" placeholder="Steps"></textarea>
+              <div class="ui pointing red basic label" 
+                *ngIf="createBugForm.get('stepToReproduce').touched 
+                    && createBugForm.get('stepToReproduce').errors
+                      && createBugForm.get('stepToReproduce').errors.required">
+                Please enter the steps
+              </div>
+            </div>
+            <div class="field" >
+
+                    <label>Severity</label>
+                 
+                    <div class="ui buttons">
+                        <a  [ngClass]="{'selected':createBugForm.value.severity==1}" class="ui  button yellow" (click)="setSeverity(1)">NORMAL</a>
+                        <a [ngClass]="{'selected':createBugForm.value.severity==2}" class="ui  button orange" (click)="setSeverity(2)">CRITICAL</a>
+                        <a [ngClass]="{'selected':createBugForm.value.severity==3}" class="ui  button red" (click)="setSeverity(3)">FATAL</a>
+                      </div>
+            </div>
+            <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" formControlName="isFixed" name="public">
+                <label>Fixed</label>
+              </div>
+            </div>
+            <div class="ui clearing right floated">
+                  <a class="ui button negative right" [routerLink]="['/bugs/']" >Cancel</a>
+                  <button class="ui button positive right" type="submit" [disabled]="!createBugForm.valid">Save</button>
+          </div>
+  </form>
+</div>
+</div>
